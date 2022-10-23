@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaEnvelopeOpen, FaUser, FaCalendarTimes, FaMap, FaPhone, FaLock } from 'react-icons/fa'
+import Button from './Button'
 const url = 'https://randomuser.me/api/'
 const defaultImage = 'https://randomuser.me/api/portraits/men/75.jpg'
 
@@ -13,7 +14,7 @@ function App() {
     const response = await fetch(url)
     const data = await response.json()
     const person = data.results[0]
-    console.log(person)
+    // console.log(person)
     const { phone, email } = person
     const { large: image } = person.picture
     const {
@@ -58,7 +59,13 @@ function App() {
           <p className='user-title'>my {title} is</p>
           <p className='user-value'>{value}</p>
           <div className='values-list'>
-            <button className='icon' data-label='name' onMouseOver={handleValue}>
+            <Button handleValue={handleValue} dataLabel='name' icon={<FaUser />} />
+            <Button handleValue={handleValue} dataLabel='email' icon={<FaEnvelopeOpen />} />
+            <Button handleValue={handleValue} dataLabel='age' icon={<FaCalendarTimes />} />
+            <Button handleValue={handleValue} dataLabel='street' icon={<FaMap />} />
+            <Button handleValue={handleValue} dataLabel='phone' icon={<FaPhone />} />
+            <Button handleValue={handleValue} dataLabel='password' icon={<FaLock />} />
+            {/* <button className='icon' data-label='name' onMouseOver={handleValue}>
               <FaUser />
             </button>
             <button className='icon' data-label='email' onMouseOver={handleValue}>
@@ -75,7 +82,7 @@ function App() {
             </button>
             <button className='icon' data-label='password' onMouseOver={handleValue}>
               <FaLock />
-            </button>
+            </button> */}
           </div>
           <button className='btn' type='button' onClick={getPerson}>
             {loading ? 'loading...' : 'random user'}
